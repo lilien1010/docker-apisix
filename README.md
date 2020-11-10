@@ -1,24 +1,20 @@
-## Docker distribution for APISIX
+**Docker images are not official ASF releases but provided for convenience. Recommended usage is always to build the source.**
 
-You can install multiple versions of APISIX through docker:
+## QuickStart
 
-1. install the latest stable version:
-```
-docker build -t iresty/apisix -f alpine/Dockerfile alpine
-```
+**start all modules with docker-compose**
 
-2. install master branch version, which has latest code:
 ```
-docker build -t apisix:master-alpine --build-arg APISIX_VERSION=master -f alpine/Dockerfile alpine
+$ cd example
+$ docker-compose -p docker-apisix up -d
 ```
 
-3. install history versions:
-```
-docker build -t apisix:0.7-alpine --build-arg APISIX_VERSION=0.7 -f alpine/Dockerfile alpine
-```
+You can refer to [the docker-compose example](example/README.md) for more try.
 
-## Run APISIX with etcd
-You need etcd docker to work with APISIX. You can refer to
- [the docker-compose example](example/README.md).
+## How To Build Image
 
-NOTE: macOS not supports `host` network mode, so Linux is recommended.
+[Build your own image](build.md) 
+
+## Manual deploy apisix via docker
+
+[Manual deploy](manual.md) 

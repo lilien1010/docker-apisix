@@ -1,8 +1,5 @@
 FROM openresty/openresty:alpine-fat AS production-stage
 
-ARG APISIX_VERSION=1.3
-LABEL apisix_version="${APISIX_VERSION}"
-
 RUN set -x \
     && /bin/sed -i 's,http://dl-cdn.alpinelinux.org,https://mirrors.aliyun.com,g' /etc/apk/repositories \
     && apk add --no-cache --virtual .builddeps \
@@ -12,8 +9,8 @@ RUN set -x \
     pkgconfig \
     cmake \
     git \
-    && luarocks install https://github.com/apache/apisix/raw/master/rockspec/apisix-${APISIX_VERSION}-0.rockspec --tree=/usr/local/apisix/deps \
-    && cp -v /usr/local/apisix/deps/lib/luarocks/rocks-5.1/apisix/${APISIX_VERSION}-0/bin/apisix /usr/bin/ \
+    && luarocks install https://github.com/apache/apisix/raw/master/rockspec/apisix-master-0.rockspec --tree=/usr/local/apisix/deps \
+    && cp -v /usr/local/apisix/deps/lib/luarocks/rocks-5.1/apisix/master-0/bin/apisix /usr/bin/ \
     && bin='#! /usr/local/openresty/luajit/bin/luajit\npackage.path = "/usr/local/apisix/?.lua;" .. package.path' \
     && sed -i "1s@.*@$bin@" /usr/bin/apisix \
     && mv /usr/local/apisix/deps/share/lua/5.1/apisix /usr/local/apisix \
